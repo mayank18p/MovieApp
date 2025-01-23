@@ -4,6 +4,7 @@
 
 This is a demo application based on the MVVM architectural pattern by using Kotlin language.
 
+
 **Technologies:**
 
 This Movies App is developed by using the following technologies and tools:
@@ -14,6 +15,7 @@ This Movies App is developed by using the following technologies and tools:
 4. Retrofit
 5. Data Binding
 6. Glide
+   
 
 **Features:**
 
@@ -27,9 +29,10 @@ Home: Highlighting top-rated Anime Series on the first page (Home screen), showi
 
 ● Poster Image
 
-Using API Endpoint for showing Top Anime: https://api.jikan.moe/v4/top/anime
+**Note:-** Using API Endpoint for showing Top Anime: https://api.jikan.moe/v4/top/anime
 
-**Note:-** Anime Detail Page: When an anime is clicked, open an Anime Detail Page. On this page, display the following information:
+
+Anime Detail Page: When an anime is clicked, open an Anime Detail Page. On this page, display the following information:
 
 ● Show poster image of Anime
 
@@ -47,6 +50,7 @@ Using API Endpoint for showing Top Anime: https://api.jikan.moe/v4/top/anime
 
 **Note:-** Using API Endpoint for showing Anime Details: https://api.jikan.moe/v4/anime/{anime_id}
 
+
 **Usage:**
 
 In order to use Movies App, follow these steps:
@@ -56,6 +60,7 @@ In order to use Movies App, follow these steps:
 3. Click on an Anime to view its details. 
 4. You will be able to see Anime Details on the next page (Anime Detail Page)
 5. That's it!
+   
 
 **Installation:**
 
