@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="animeData"
+            type="com.example.movieapp.data.AnimeDetailsResponse"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/poster"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="@{animeData.data.title}"
+            android:textSize="20sp"
+            android:ellipsize="end"
+            android:lines="2"
+            app:layout_constraintTop_toBottomOf="@+id/poster"
+            tools:text="Title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/episodes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/sea_green"
+            android:textSize="16sp"
+            android:text="@{String.valueOf(`Episodes `  + animeData.data.episodes)}"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="Episodes" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/yellow"
+            android:textSize="16sp"
+            android:text="@{String.valueOf(`Rating ` + animeData.data.score)}"
+            app:layout_constraintTop_toBottomOf="@+id/episodes"
+            tools:text="Rating"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/infoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/rating"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/synopsis"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="4dp"
+                            android:textColor="@color/grey"
+                            android:textSize="16sp"
+                            android:text="@{String.valueOf(`Rating ` + animeData.data.synopsis)}"
+                            tools:text="Synopsis"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
