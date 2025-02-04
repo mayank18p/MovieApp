@@ -18,7 +18,6 @@ class AnimeViewModel(private val animeRepository: AnimeRepository) : ViewModel()
     }
 
     val showProgress = MutableLiveData<Boolean>()
-
     val animeSeriesData = MutableLiveData<Resource<AnimeSeriesResponse>>()
     val animeDetailsData = MutableLiveData<Resource<AnimeDetailsResponse>>()
 

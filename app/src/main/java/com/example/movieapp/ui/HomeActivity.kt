@@ -2,6 +2,7 @@ package com.example.movieapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -21,16 +22,23 @@ class HomeActivity : AppCompatActivity(), ClickListener {
     private lateinit var viewModel: AnimeViewModel
     private lateinit var animeListAdapter: AnimeListAdapter
 
+    private lateinit var repository: AnimeRepository
+    private lateinit var factory: AnimeViewModelFactory
+
+    companion object {
+        const val TAG = "HomeActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = HomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repository = AnimeRepository()
-        val factory = AnimeViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(AnimeViewModel::class.java)
-
+        repository = AnimeRepository()
+        factory = AnimeViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[AnimeViewModel::class.java]
         setUpObservers()
+
     }
 
     private fun setUpObservers() {
@@ -54,23 +62,13 @@ class HomeActivity : AppCompatActivity(), ClickListener {
             }
 
         }
-    }
-
-    private fun setAnimeSeriesAdapter(response: AnimeSeriesResponse) {
-        animeListAdapter = AnimeListAdapter(this@HomeActivity, this, response.data)
-        binding.recyclerView.adapter = animeListAdapter
-    }
-
-    override fun click(animeId: Int) {
-        viewModel.getAnimeDetails(animeId)
 
         viewModel.animeDetailsData.observe(this) { response ->
             when (response) {
                 is Resource.Success -> {
-                    response.data?.let {
+                    response.data?.let { data ->
                         val intent = Intent(this@HomeActivity, DetailActivity::class.java)
-                        intent.putExtra("data", it)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        intent.putExtra("data", data)
                         startActivity(intent)
                     }
                 }
@@ -87,5 +85,16 @@ class HomeActivity : AppCompatActivity(), ClickListener {
             }
 
         }
+    }
+
+    private fun setAnimeSeriesAdapter(response: AnimeSeriesResponse) {
+        animeListAdapter = AnimeListAdapter(this@HomeActivity, this, response.data)
+        binding.recyclerView.adapter = animeListAdapter
+        binding.executePendingBindings()
+    }
+
+    override fun click(animeId: Int) {
+        viewModel.getAnimeDetails(animeId)
+        Log.d(TAG, "$animeId")
     }
 }

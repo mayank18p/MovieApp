@@ -27,17 +27,21 @@ class AnimeListAdapter(
         return data.size
     }
 
-    class AnimeListViewHolder(private val binding: AnimeListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
+    }
 
+    class AnimeListViewHolder(private val binding: AnimeListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Data, context: Context, listener: ClickListener) {
             binding.animeSeries = data
-            binding.executePendingBindings()
 
             Glide.with(context).load(data.images.jpg.image_url).into(binding.poster)
 
-            binding.root.setOnClickListener {
+            binding.poster.setOnClickListener {
                 listener.click(data.mal_id)
             }
+
+            binding.executePendingBindings()
         }
     }
 

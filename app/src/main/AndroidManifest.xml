@@ -29,8 +29,8 @@
 
         <activity
             android:name="com.example.movieapp.ui.DetailActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MovieApp.NoActionBar"/>
+            android:theme="@style/Theme.MovieApp.NoActionBar"
+            android:launchMode="singleTop"/>
 
     </application>
 

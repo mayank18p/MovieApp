@@ -13,6 +13,11 @@ class DetailActivity : AppCompatActivity() {
 
     private var animeDetailsResponse: AnimeDetailsResponse? = null
 
+    companion object {
+        const val TAG = "DetailActivity"
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DetailActivityBinding.inflate(layoutInflater)
@@ -23,13 +28,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun getData() {
         animeDetailsResponse =  intent.getParcelableExtra<AnimeDetailsResponse>("data")
-        setDataToViews()
+        setDataToViews(animeDetailsResponse)
     }
 
-  private fun setDataToViews() {
+  private fun setDataToViews(animeDetailsResponse: AnimeDetailsResponse?) {
        binding.animeData = animeDetailsResponse
+       Glide.with(this).load(this.animeDetailsResponse?.data?.images?.jpg?.image_url).into(binding.poster)
        binding.executePendingBindings()
-
-       Glide.with(this).load(animeDetailsResponse?.data?.images?.jpg?.image_url).into(binding.poster)
   }
 }
